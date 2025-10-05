@@ -1,0 +1,15 @@
+# Arquivos compilados
+*.class
+*.jar
+
+# Pastas temporárias
+bin/
+out/
+
+# Texturas e assets que o usuário pode adicionar
+assets/textures/
+
+# Arquivos de IDE
+.idea/
+*.iml
+*.vscode/
