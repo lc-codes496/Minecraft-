@@ -10,9 +10,22 @@ public class World {
     private int width = 50;
     private int depth = 50;
 
+    // IDs das texturas
+    private int grassTex, dirtTex, stoneTex, sandTex, waterTex;
+
     public World() {
         blocks = new ArrayList<>();
+        loadTextures();
         generateTerrain();
+    }
+
+    private void loadTextures() {
+        // Carrega as texturas automaticamente da pasta assets/textures
+        grassTex = TextureLoader.loadTexture("assets/textures/grass.png");
+        dirtTex = TextureLoader.loadTexture("assets/textures/dirt.png");
+        stoneTex = TextureLoader.loadTexture("assets/textures/stone.png");
+        sandTex = TextureLoader.loadTexture("assets/textures/sand.png");
+        waterTex = TextureLoader.loadTexture("assets/textures/water.png");
     }
 
     private void generateTerrain() {
@@ -21,31 +34,27 @@ public class World {
         for (int x = 0; x < width; x++) {
             for (int z = 0; z < depth; z++) {
                 int height = 3 + random.nextInt(3); // altura do bloco
-                for (int y = 0; y < height; y++) {
-                    BlockType type;
-                    if (y == height - 1) type = BlockType.GRASS;
-                    else type = BlockType.DIRT;
 
-                    int textureID = getTextureIDForBlock(type); // atribui a textura automaticamente
-                    blocks.add(new Block(new Vector3f(x, y, z), type, textureID));
+                for (int y = 0; y < height; y++) {
+                    BlockType type = (y == height - 1) ? BlockType.GRASS : BlockType.DIRT;
+                    int texID = getTextureIDForBlock(type);
+                    blocks.add(new Block(new Vector3f(x, y, z), type, texID));
                 }
 
-                // Adiciona pedra abaixo da terra
-                blocks.add(new Block(new Vector3f(x, -1, z), BlockType.STONE, getTextureIDForBlock(BlockType.STONE)));
+                // Pedra abaixo da terra
+                blocks.add(new Block(new Vector3f(x, -1, z), BlockType.STONE, stoneTex));
             }
         }
     }
 
     private int getTextureIDForBlock(BlockType type) {
-        // Aqui você pode usar TextureLoader.loadTexture("assets/textures/...") 
-        // ou deixar um ID padrão, por exemplo:
         switch (type) {
-            case GRASS: return 1;
-            case DIRT: return 2;
-            case STONE: return 3;
-            case SAND: return 4;
-            case WATER: return 5;
-            default: return 1;
+            case GRASS: return grassTex;
+            case DIRT:  return dirtTex;
+            case STONE: return stoneTex;
+            case SAND:  return sandTex;
+            case WATER: return waterTex;
+            default: return grassTex;
         }
     }
 
@@ -56,4 +65,4 @@ public class World {
     public void update() {
         // Futuras atualizações do mundo (árvores, mobs etc.)
     }
-        }
+                                                  }
