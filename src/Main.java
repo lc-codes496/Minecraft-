@@ -1,14 +1,16 @@
 package src;
 
-import org.lwjgl.*;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.system.*;
-
-import java.nio.*;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 
 public class Main {
     private long window;
+    private int width = 800;
+    private int height = 600;
+
+    private Game game;
+    private Input input;
 
     public void run() {
         System.out.println("Iniciando Minecraft Java!");
@@ -20,22 +22,39 @@ public class Main {
     }
 
     private void init() {
-        if (!GLFW.glfwInit())
+        if (!GLFW.glfwInit()) {
             throw new IllegalStateException("Falha ao iniciar GLFW!");
+        }
 
-        window = GLFW.glfwCreateWindow(800, 600, "Minecraft Java", 0, 0);
-        if (window == 0)
-            throw new RuntimeException("Falha ao criar janela!");
+        window = GLFW.glfwCreateWindow(width, height, "Minecraft Java", 0, 0);
+        if (window == 0) throw new RuntimeException("Falha ao criar janela!");
 
         GLFW.glfwMakeContextCurrent(window);
+        GLFW.glfwShowWindow(window);
         GL.createCapabilities();
+
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+
+        // Inicializa Input
+        input = new Input(window);
+
+        // Inicializa o Game e conecta o Input ao Player
+        game = new Game();
+        game.player.setInput(input);
     }
 
     private void loop() {
-        while (!GLFW.glfwWindowShouldClose(window)) {
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-            GL11.glClearColor(0.3f, 0.6f, 1.0f, 0.0f); // céu azul
+        double lastTime = GLFW.glfwGetTime();
 
+        while (!GLFW.glfwWindowShouldClose(window)) {
+            double currentTime = GLFW.glfwGetTime();
+            double deltaTime = currentTime - lastTime;
+            lastTime = currentTime;
+
+            // Atualiza o jogo
+            game.update();
+
+            // Troca buffers
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();
         }
