@@ -60,11 +60,29 @@ public class Renderer {
         GL11.glTexCoord2f(1, 1); GL11.glVertex3f(1, 1, 1);
         GL11.glTexCoord2f(0, 1); GL11.glVertex3f(0, 1, 1);
 
-        // Lados
-        GL11.glTexCoord2f(0,0); GL11.glVertex3f(0,0,0); GL11.glTexCoord2f(1,0); GL11.glVertex3f(0,1,0); GL11.glTexCoord2f(1,1); GL11.glVertex3f(0,1,1); GL11.glTexCoord2f(0,1); GL11.glVertex3f(0,0,1);
-        GL11.glTexCoord2f(0,0); GL11.glVertex3f(1,0,0); GL11.glTexCoord2f(1,0); GL11.glVertex3f(1,1,0); GL11.glTexCoord2f(1,1); GL11.glVertex3f(1,1,1); GL11.glTexCoord2f(0,1); GL11.glVertex3f(1,0,1);
-        GL11.glTexCoord2f(0,0); GL11.glVertex3f(0,1,0); GL11.glTexCoord2f(1,0); GL11.glVertex3f(1,1,0); GL11.glTexCoord2f(1,1); GL11.glVertex3f(1,1,1); GL11.glTexCoord2f(0,1); GL11.glVertex3f(0,1,1);
-        GL11.glTexCoord2f(0,0); GL11.glVertex3f(0,0,0); GL11.glTexCoord2f(1,0); GL11.glVertex3f(1,0,0); GL11.glTexCoord2f(1,1); GL11.glVertex3f(1,0,1); GL11.glTexCoord2f(0,1); GL11.glVertex3f(0,0,1);
+        // Esquerda
+        GL11.glTexCoord2f(0, 0); GL11.glVertex3f(0, 0, 0);
+        GL11.glTexCoord2f(1, 0); GL11.glVertex3f(0, 1, 0);
+        GL11.glTexCoord2f(1, 1); GL11.glVertex3f(0, 1, 1);
+        GL11.glTexCoord2f(0, 1); GL11.glVertex3f(0, 0, 1);
+
+        // Direita
+        GL11.glTexCoord2f(0, 0); GL11.glVertex3f(1, 0, 0);
+        GL11.glTexCoord2f(1, 0); GL11.glVertex3f(1, 1, 0);
+        GL11.glTexCoord2f(1, 1); GL11.glVertex3f(1, 1, 1);
+        GL11.glTexCoord2f(0, 1); GL11.glVertex3f(1, 0, 1);
+
+        // Topo
+        GL11.glTexCoord2f(0, 0); GL11.glVertex3f(0, 1, 0);
+        GL11.glTexCoord2f(1, 0); GL11.glVertex3f(1, 1, 0);
+        GL11.glTexCoord2f(1, 1); GL11.glVertex3f(1, 1, 1);
+        GL11.glTexCoord2f(0, 1); GL11.glVertex3f(0, 1, 1);
+
+        // Base
+        GL11.glTexCoord2f(0, 0); GL11.glVertex3f(0, 0, 0);
+        GL11.glTexCoord2f(1, 0); GL11.glVertex3f(1, 0, 0);
+        GL11.glTexCoord2f(1, 1); GL11.glVertex3f(1, 0, 1);
+        GL11.glTexCoord2f(0, 1); GL11.glVertex3f(0, 0, 1);
 
         GL11.glEnd();
         GL11.glPopMatrix();
